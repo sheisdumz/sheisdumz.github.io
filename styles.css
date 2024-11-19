@@ -1,48 +1,86 @@
+/* General Layout */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.sort-options {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-.lessons {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.lesson {
-    background: #fff;
-    margin: 10px;
     padding: 20px;
-    border: 1px solid #ddd;
-    flex: 1 1 calc(33.333% - 20px);
-    box-sizing: border-box;
+    background-color: #f4f4f9;
 }
 
-.lesson h3 {
-    margin-top: 0;
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Sorting Controls */
+label {
+    margin-right: 8px;
+}
+
+select {
+    padding: 5px;
+    margin-right: 20px;
+}
+
+/* Lessons Grid */
+.lesson-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* Lesson Box Style */
+.lesson-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.lesson-box i {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
 button {
-    background: #333;
-    color: #fff;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    padding: 10px 20px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background: #555;
+button:disabled {
+    background-color: #ccc;
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:disabled {
+    background-color: #ccc;
+}
+
+form button:hover:not(:disabled) {
+    background-color: #0056b3;
 }

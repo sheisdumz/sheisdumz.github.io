@@ -34,9 +34,41 @@
                 <button @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
             </div>
         </div>
-        <form @submit.prevent="checkout">
-            <button type="submit" :disabled="cart.length === 0">Checkout</button>
-        </form>
+
+        <!-- Shopping Cart Section -->
+        <div id="cart">
+            <h2>Shopping Cart</h2>
+            <ul>
+                <li v-for="item in cart" :key="item.id">{{ item.subject }} - Rs{{ item.price }}</li>
+            </ul>
+            
+            <!-- Checkout Form -->
+            <h2>Checkout</h2>
+            <form @submit.prevent="checkout">
+                <label for="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    v-model="name"
+                    placeholder="Enter your name"
+                    @input="validateName"
+                />
+                <span v-if="nameError" class="error">{{ nameError }}</span>
+                
+                <label for="phone">Phone:</label>
+                <input
+                    type="text"
+                    id="phone"
+                    v-model="phone"
+                    placeholder="Enter your phone number"
+                    @input="validatePhone"
+                />
+                <span v-if="phoneError" class="error">{{ phoneError }}</span>
+
+                <!-- Checkout Button -->
+                <button type="submit" :disabled="!isFormValid">Checkout</button>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
