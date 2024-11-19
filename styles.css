@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.sort-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.lessons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lesson {
+    background: #fff;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+.lesson h3 {
+    margin-top: 0;
+}
+
+button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
