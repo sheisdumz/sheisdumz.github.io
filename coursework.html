@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After School Classes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1>After School Classes</h1>
+        <div>
+            <label for="sortAttribute">Sort by:</label>
+            <select v-model="sortAttribute" id="sortAttribute">
+                <option value="subject">Subject</option>
+                <option value="location">Location</option>
+                <option value="price">Price</option>
+                <option value="spaces">Spaces</option>
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select v-model="sortOrder" id="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+        <div class="lesson-container">
+            <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
+                <i :class="lesson.icon"></i>
+                <h2>{{ lesson.subject }}</h2>
+                <p>Location: {{ lesson.location }}</p>
+                <p>Price: Rs{{ lesson.price }}</p>
+                <p>Spaces left: {{ lesson.spaces }}</p>
+                <button @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+            </div>
+        </div>
+        <form @submit.prevent="checkout">
+            <button type="submit" :disabled="cart.length === 0">Checkout</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
