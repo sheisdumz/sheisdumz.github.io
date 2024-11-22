@@ -31,7 +31,7 @@
                 <p>Location: {{ lesson.location }}</p>
                 <p>Price: Rs{{ lesson.price }}</p>
                 <p>Spaces left: {{ lesson.spaces }}</p>
-                <button @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+                <button v-on click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
             </div>
         </div>
 
