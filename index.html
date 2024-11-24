@@ -35,12 +35,14 @@
             </div>
         </div>
 
-        <!-- Shopping Cart Section -->
-        <div id="cart">
-            <h2>Shopping Cart</h2>
-            <ul>
-                <li v-for="lesson in cart" :key="lesson.id">{{ lesson.subject }} - Rs{{ lesson.price }}</li>
-            </ul>
+<!-- Shopping Cart Section -->
+<div id="cart">
+    <h2>Shopping Cart</h2>
+    <ul>
+        <li v-for="lesson in cart" :key="lesson.id">
+            {{ lesson.subject }} - Rs{{ lesson.price }}
+        </li>
+    </ul>
             
             <!-- Checkout Form -->
             <h2>Checkout</h2>
