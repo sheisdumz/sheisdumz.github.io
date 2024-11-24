@@ -1,18 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
-        lessons: [
-            { id: 1, subject: 'MATHEMATICS', location: 'Room 10', price: 2000, spaces: 10, icon: 'fas fa-calculator' },
-            { id: 2, subject: 'ENGLISH LANGUAGE', location: 'Room 12', price: 1500, spaces: 8, icon: 'fas fa-flask' },
-            { id: 3, subject: 'CURRENT AFFAIRS', location: 'Room 14', price: 1500, spaces: 5, icon: 'fas fa-landmark' },
-            { id: 4, subject: 'BUSINESS MANAGEMENT', location: 'Room 16', price: 1800, spaces: 8, icon: 'fas fa-paint-brush' },
-            { id: 5, subject: 'HEALTH SCIENCES', location: 'Room 18', price: 3000, spaces: 10, icon: 'fas fa-music' },
-            { id: 6, subject: 'HISTORY', location: 'Room 20', price: 1500, spaces: 7, icon: 'fas fa-dumbbell' },
-            { id: 7, subject: 'SOCIAL SCIENCES', location: 'Room 22', price: 1000, spaces: 25, icon: 'fas fa-laptop-code' },
-            { id: 8, subject: 'ACCOUNTING', location: 'Room 24', price: 3000, spaces: 18, icon: 'fas fa-theater-masks' },
-            { id: 9, subject: 'ITALIAN LANGUAGE', location: 'Room 26', price: 2000, spaces: 10, icon: 'fas fa-language' },
-            { id: 10, subject: 'FRENCH LANGUAGE', location: 'Room 28', price: 2500, spaces: 7, icon: 'fas fa-language' }
-        ],
+        lessons: [],
         cart: [],
         sortAttribute: 'subject',
         sortOrder: 'asc',
