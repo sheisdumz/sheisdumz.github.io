@@ -34,9 +34,8 @@ let app = new Vue({
                 const response = await fetch(
                     `https://express-js-qwj4.onrender.com/collections/courses`
                 );
-        
                 if (response.ok) {
-                    this.lessons = await response.json();  // Assign to this.lessons
+                    this.lessons = await response.json();
                     console.log('Fetched courses:', this.lessons);
                 } else {
                     console.error('Failed to fetch courses:', await response.text());
@@ -47,7 +46,7 @@ let app = new Vue({
         },
         addToCart(lesson) {
             if (lesson.spaces > 0) {
-                this.cart.push({ ...lesson });
+                this.cart.push({ lesson });
                 lesson.spaces--;
             }
         },
