@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "674092941e596ef433f83201"
+  },
+  "id": 1,
+  "subject": "MATHEMATICS",
+  "location": "Room 10",
+  "price": 2000,
+  "spaces": 10,
+  "icon": "fas fa-calculator"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83202"
+  },
+  "id": 2,
+  "subject": "ENGLISH LANGUAGE",
+  "location": "Room 12",
+  "price": 1500,
+  "spaces": 8,
+  "icon": "fas fa-flask"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83203"
+  },
+  "id": 3,
+  "subject": "CURRENT AFFAIRS",
+  "location": "Room 14",
+  "price": 1500,
+  "spaces": 5,
+  "icon": "fas fa-landmark"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83204"
+  },
+  "id": 4,
+  "subject": "BUSINESS MANAGEMENT",
+  "location": "Room 16",
+  "price": 1800,
+  "spaces": 8,
+  "icon": "fas fa-paint-brush"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83205"
+  },
+  "id": 5,
+  "subject": "HEALTH SCIENCES",
+  "location": "Room 18",
+  "price": 3000,
+  "spaces": 10,
+  "icon": "fas fa-music"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83206"
+  },
+  "id": 6,
+  "subject": "HISTORY",
+  "location": "Room 20",
+  "price": 1500,
+  "spaces": 7,
+  "icon": "fas fa-dumbbell"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83207"
+  },
+  "id": 7,
+  "subject": "SOCIAL SCIENCES",
+  "location": "Room 22",
+  "price": 1000,
+  "spaces": 25,
+  "icon": "fas fa-laptop-code"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83208"
+  },
+  "id": 8,
+  "subject": "ACCOUNTING",
+  "location": "Room 24",
+  "price": 3000,
+  "spaces": 18,
+  "icon": "fas fa-theater-masks"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f83209"
+  },
+  "id": 9,
+  "subject": "ITALIAN LANGUAGE",
+  "location": "Room 26",
+  "price": 2000,
+  "spaces": 10,
+  "icon": "fas fa-language"
+},
+{
+  "_id": {
+    "$oid": "674092941e596ef433f8320a"
+  },
+  "id": 10,
+  "subject": "FRENCH LANGUAGE",
+  "location": "Room 28",
+  "price": 2500,
+  "spaces": 7,
+  "icon": "fas fa-language"
+}]

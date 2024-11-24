@@ -29,6 +29,24 @@ let app = new Vue({
         }
     },
     methods: {
+        fetchProducts: async function () {
+            try {
+                // Build the query URL with search and sorting parameters
+                const response = await fetch(
+                   `https://express-js-qwj4.onrender.com/collections/courses`
+                );
+
+                // Parse and update the products array
+                if (response.ok) {
+                    this.products = await response.json();
+                    console.log('Fetched courses:', this.products);
+                } else {
+                    console.error('Failed to fetch courses:', await response.text());
+                }
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        },
         addToCart(lesson) {
             if (lesson.spaces > 0) {
                 this.cart.push({ ...lesson });
