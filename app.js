@@ -71,5 +71,8 @@ let app = new Vue({
             this.name = '';
             this.phone = '';
         }
+    },
+    mounted: function () {
+        this.fetchProducts();
     }
 });
