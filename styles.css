@@ -44,6 +44,13 @@ select {
     font-size: 32px;
     margin-bottom: 10px;
 }
+.lesson-image {
+    width: 100%; /* Make the image fit the container width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: add rounded corners */
+    margin-bottom: 10px; /* Spacing between image and title */
+    object-fit: cover; /* Ensure the image covers the box proportionally */
+}
 
 button {
     margin-top: 10px;
