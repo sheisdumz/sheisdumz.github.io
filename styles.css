@@ -1,3 +1,4 @@
+/* General Layout */
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -19,7 +20,7 @@ select {
     margin-right: 20px;
 }
 
-/* Lesson Page Layout */
+/* Lessons Grid */
 .lesson-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -27,6 +28,7 @@ select {
     margin-top: 20px;
 }
 
+/* Lesson Box Style */
 .lesson-box {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -36,8 +38,6 @@ select {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    height: 250px; /* Fixed height for uniformity */
 }
 
 .lesson-box i {
@@ -63,60 +63,9 @@ button:hover:not(:disabled) {
     background-color: #45a049;
 }
 
-/* Cart Page Layout */
-.cart-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.cart-container .lesson-box {
-    margin: 10px auto;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: none;
-    padding: 16px;
-}
-
-.cart-container .lesson-box button {
-    background-color: #f44336;
-    padding: 6px 12px;
-}
-
-.cart-container .lesson-box button:hover {
-    background-color: #d32f2f;
-}
-
-.cart-container h2 {
-    margin-bottom: 20px;
-}
-
-/* Checkout Form Layout */
 form {
     margin-top: 20px;
     text-align: center;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-form input {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-form input:focus {
-    outline-color: #4CAF50;
-}
-
-form .error {
-    color: red;
-    font-size: 14px;
 }
 
 form button {
@@ -126,7 +75,6 @@ form button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 form button:disabled {
@@ -135,42 +83,4 @@ form button:disabled {
 
 form button:hover:not(:disabled) {
     background-color: #0056b3;
-}
-
-/* Shopping Cart Button */
-button:enabled {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background-color: #008CBA;
-    color: white;
-    font-size: 18px;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-button:enabled:hover {
-    background-color: #006f8c;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Responsive Layout */
-@media (max-width: 768px) {
-    .lesson-container {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .lesson-box {
-        height: auto;
-    }
-
-    form {
-        width: 90%;
-    }
 }
