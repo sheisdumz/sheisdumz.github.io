@@ -26,7 +26,6 @@
         </div>
         <div class="lesson-container">
             <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
-                <img :src="lesson.image" :alt="lesson.subject" class="lesson-image" />
                 <i :class="lesson.icon"></i>
                 <h2>{{ lesson.subject }}</h2>
                 <p>Location: {{ lesson.location }}</p>

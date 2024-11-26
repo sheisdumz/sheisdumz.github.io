@@ -7,7 +7,7 @@
   "location": "Room 10",
   "price": 2000,
   "spaces": 10,
-  "icon": "fas fa-calculator",
+  "icon": "fas fa-calculator"
 },
 {
   "_id": {
