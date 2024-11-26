@@ -10,6 +10,8 @@
 <body>
     <div id="app">
         <h1>After School Classes</h1>
+
+        <!-- Sorting and Filter Controls -->
         <div>
             <label for="sortAttribute">Sort by:</label>
             <select v-model="sortAttribute" id="sortAttribute">
@@ -24,22 +26,60 @@
                 <option value="desc">Descending</option>
             </select>
         </div>
+
+        <!-- Loading Message -->
         <div v-if="loading" class="loading-message">
             <p>LOADING LESSONS...</p>
         </div>
-        <div class="lesson-container">
-            <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
-                <i :class="lesson.icon"></i>
-                <h2>{{ lesson.subject }}</h2>
-                <p>Location: {{ lesson.location }}</p>
-                <p>Price: Rs{{ lesson.price }}</p>
-                <p>Spaces left: {{ lesson.spaces }}</p>
-                <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+
+        <!-- Lesson or Cart Page Toggle -->
+        <div v-if="isCartPage">
+            <h2>Your Cart</h2>
+            <div class="lesson-container">
+                <!-- Display Cart Items -->
+                <div v-for="(cartItem, index) in cart" :key="index" class="lesson-box">
+                    <i :class="cartItem.lesson.icon"></i>
+                    <h2>{{ cartItem.lesson.subject }}</h2>
+                    <p>Location: {{ cartItem.lesson.location }}</p>
+                    <p>Price: Rs{{ cartItem.lesson.price }}</p>
+                    <button @click="removeFromCart(index)">Remove from Cart</button>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div>
+                <h3>Checkout</h3>
+                <form @submit.prevent="checkout">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" v-model="name" placeholder="Enter your name" @input="validateName"/>
+                    <span v-if="nameError" class="error">{{ nameError }}</span>
+
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" v-model="phone" placeholder="Enter your phone number" @input="validatePhone"/>
+                    <span v-if="phoneError" class="error">{{ phoneError }}</span>
+
+                    <button type="submit" :disabled="!isFormValid">Checkout</button>
+                </form>
             </div>
         </div>
-            
-            </form>
+
+        <!-- Lessons Page -->
+        <div v-else>
+            <h2>Available Lessons</h2>
+            <div class="lesson-container">
+                <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
+                    <i :class="lesson.icon"></i>
+                    <h2>{{ lesson.subject }}</h2>
+                    <p>Location: {{ lesson.location }}</p>
+                    <p>Price: Rs{{ lesson.price }}</p>
+                    <p>Spaces left: {{ lesson.spaces }}</p>
+                    <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+                </div>
+            </div>
         </div>
+
+        <!-- Shopping Cart Button -->
+        <button :disabled="cart.length === 0" @click="toggleCartPage">View Cart</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
