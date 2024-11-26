@@ -8,7 +8,8 @@ let app = new Vue({
         name: '',
         phone: '',
         nameError: '',
-        phoneError: ''
+        phoneError: '',
+        loading: true 
     },
     computed: {
         sortedLessons() {
@@ -42,6 +43,9 @@ let app = new Vue({
                 }
             } catch (error) {
                 console.error('Error fetching courses:', error);
+            }
+            finally {
+                this.loading = false;
             }
         },
         addToCart(lesson) {

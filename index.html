@@ -24,6 +24,9 @@
                 <option value="desc">Descending</option>
             </select>
         </div>
+        <div v-if="loading" class="loading-message">
+            <p>Loading lessons...</p>
+        </div>
         <div class="lesson-container">
             <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
                 <i :class="lesson.icon"></i>
