@@ -27,10 +27,13 @@
         <div v-if="loading" class="loading-message">
             <p>LOADING LESSONS...</p>
         </div>
-        <button v-if="cart.length > 0" v-on:click="toggleCartPage">Shopping Cart ({{ cart.length }})</button>
+        <button v-on:click="toggleCartPage">{{ showCart ? 'Back to Lessons' : 'Shopping Cart (' + cart.length + ')' }}</button>
         <div v-if="showCart">
             <h2>Shopping Cart</h2>
-            <div class="lesson-container">
+            <div v-if="cart.length === 0">
+                <p>Oops! There is nothing in your cart.</p>
+            </div>
+            <div v-else class="lesson-container">
                 <div v-for="lesson in cart" :key="lesson.id" class="cart-item">
                     <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
                     <h2>{{ lesson.subject }}</h2>
@@ -40,7 +43,7 @@
                     <button v-on:click="removeFromCart(lesson)">Remove</button>
                 </div>
             </div>
-            <div>
+            <div v-if="cart.length > 0">
                 <label for="name">Name:</label>
                 <input type="text" id="name" v-model="name" @input="validateName">
                 <span class="error" v-if="nameError">{{ nameError }}</span>
