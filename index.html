@@ -31,7 +31,7 @@
         <div v-if="showCart">
             <h2>Shopping Cart</h2>
             <div class="lesson-container">
-                <div v-for="lesson in cart" :key="lesson.id" class="lesson-box">
+                <div v-for="lesson in cart" :key="lesson.id" class="cart-item">
                     <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
                     <h2>{{ lesson.subject }}</h2>
                     <p>Location: {{ lesson.location }}</p>
