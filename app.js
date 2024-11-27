@@ -3,6 +3,7 @@ let app = new Vue({
     data: {
         lessons: [],
         cart: [],
+        showCart: false,
         sortAttribute: 'subject',
         sortOrder: 'asc',
         name: '',
@@ -20,17 +21,14 @@ let app = new Vue({
                 return 0;
             });
         },
-        isFormValid() {
-            return (
-                !this.nameError && 
-                !this.phoneError && 
-                this.name.trim() !== '' && 
-                this.phone.trim() !== ''
-            );
+        isCheckoutEnabled() {
+            const nameValid = /^[a-zA-Z\s]+$/.test(this.name);
+            const phoneValid = /^[0-9]+$/.test(this.phone);
+            return nameValid && phoneValid;
         }
     },
     methods: {
-        fetchProducts: async function () {
+        async fetchProducts() {
             try {
                 const response = await fetch(
                     `https://express-js-qwj4.onrender.com/collections/courses`
@@ -43,16 +41,25 @@ let app = new Vue({
                 }
             } catch (error) {
                 console.error('Error fetching courses:', error);
-            }
-            finally {
+            } finally {
                 this.loading = false;
             }
         },
         addToCart(lesson) {
             if (lesson.spaces > 0) {
-                this.cart.push({ lesson });
+                this.cart.push(lesson);
                 lesson.spaces--;
             }
+        },
+        removeFromCart(lesson) {
+            const index = this.cart.indexOf(lesson);
+            if (index > -1) {
+                this.cart.splice(index, 1);
+                lesson.spaces++;
+            }
+        },
+        toggleCartPage() {
+            this.showCart = !this.showCart;
         },
         validateName() {
             const nameRegex = /^[a-zA-Z\s]+$/;
@@ -67,13 +74,16 @@ let app = new Vue({
                 : 'Phone must contain only numbers.';
         },
         checkout() {
-            alert(`Order submitted with ${this.cart.length} items. Thank you!`);
-            this.cart = [];
-            this.name = '';
-            this.phone = '';
+            if (this.isCheckoutEnabled) {
+                alert(`Order submitted with ${this.cart.length} items. Thank you!`);
+                this.cart = [];
+                this.name = '';
+                this.phone = '';
+                this.showCart = false;
+            }
         }
     },
-    mounted: function () {
+    mounted() {
         this.fetchProducts();
     }
 });
