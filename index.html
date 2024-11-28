@@ -11,6 +11,8 @@
     <div id="app">
         <h1>After School Classes</h1>
         <div v-if="!showCart">
+            <label for="search">Search:</label>
+            <input type="text" id="search" v-model="searchQuery" placeholder="Search for lessons...">
             <label for="sortAttribute">Sort by:</label>
             <select v-model="sortAttribute" id="sortAttribute">
                 <option value="subject">Subject</option>
@@ -57,7 +59,7 @@
         </div>
         <div v-else>
             <div class="lesson-container">
-                <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-box">
+                <div v-for="lesson in filteredLessons" :key="lesson.id" class="lesson-box">
                     <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
                     <h2>{{ lesson.subject }}</h2>
                     <p>Location: {{ lesson.location }}</p>
