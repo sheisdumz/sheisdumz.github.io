@@ -1,33 +1,37 @@
 let app = new Vue({
     el: '#app',
     data: {
-        lessons: [],
-        cart: [],
-        showCart: false,
-        sortAttribute: 'subject',
-        sortOrder: 'asc',
-        searchQuery: '',
-        name: '',
-        phone: '',
-        nameError: '',
-        phoneError: '',
-        loading: true 
+        lessons: [],        // List of lessons fetched from API
+        cart: [],           // Items added to the cart
+        showCart: false,    // Toggle between lessons view and cart view
+        sortAttribute: 'subject',  // Sorting criteria
+        sortOrder: 'asc',   // Sorting order
+        searchQuery: '',    // Search query input
+        name: '',           // User's name input
+        phone: '',          // User's phone input
+        nameError: '',      // Validation error for name
+        phoneError: '',     // Validation error for phone
+        loading: true       // Loading indicator for fetching lessons
     },
     computed: {
+        // Dynamically filter and sort lessons based on search and sort criteria
         filteredLessons() {
-            return this.lessons.filter(lesson => {
-                const query = this.searchQuery.toLowerCase();
-                return lesson.subject.toLowerCase().includes(query) ||
-                       lesson.location.toLowerCase().includes(query) ||
-                       lesson.price.toString().includes(query) ||
-                       lesson.spaces.toString().includes(query);
-            }).sort((a, b) => {
-                let modifier = this.sortOrder === 'asc' ? 1 : -1;
-                if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
-                if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
-                return 0;
-            });
+            return this.lessons
+                .filter(lesson => {
+                    const query = this.searchQuery.toLowerCase();
+                    return lesson.subject.toLowerCase().includes(query) ||
+                           lesson.location.toLowerCase().includes(query) ||
+                           lesson.price.toString().includes(query) ||
+                           lesson.spaces.toString().includes(query);
+                })
+                .sort((a, b) => {
+                    let modifier = this.sortOrder === 'asc' ? 1 : -1;
+                    if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
+                    if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
+                    return 0;
+                });
         },
+        // Enable checkout button only if name and phone are valid
         isCheckoutEnabled() {
             const nameValid = /^[a-zA-Z\s]+$/.test(this.name);
             const phoneValid = /^[0-9]+$/.test(this.phone);
@@ -35,6 +39,7 @@ let app = new Vue({
         }
     },
     methods: {
+        // Fetch lessons from the API
         async fetchProducts() {
             try {
                 const response = await fetch(
@@ -42,7 +47,6 @@ let app = new Vue({
                 );
                 if (response.ok) {
                     this.lessons = await response.json();
-                    console.log('Fetched courses:', this.lessons);
                 } else {
                     console.error('Failed to fetch courses:', await response.text());
                 }
@@ -52,12 +56,14 @@ let app = new Vue({
                 this.loading = false;
             }
         },
+        // Add a lesson to the cart
         addToCart(lesson) {
             if (lesson.spaces > 0) {
                 this.cart.push(lesson);
                 lesson.spaces--;
             }
         },
+        // Remove a lesson from the cart
         removeFromCart(lesson) {
             const index = this.cart.indexOf(lesson);
             if (index > -1) {
@@ -65,21 +71,25 @@ let app = new Vue({
                 lesson.spaces++;
             }
         },
+        // Toggle between cart and lessons page
         toggleCartPage() {
             this.showCart = !this.showCart;
         },
+        // Validate name input
         validateName() {
             const nameRegex = /^[a-zA-Z\s]+$/;
             this.nameError = nameRegex.test(this.name)
                 ? ''
                 : 'Name must contain only letters.';
         },
+        // Validate phone input
         validatePhone() {
             const phoneRegex = /^[0-9]+$/;
             this.phoneError = phoneRegex.test(this.phone)
                 ? ''
                 : 'Phone must contain only numbers.';
         },
+        // Handle checkout
         checkout() {
             if (this.isCheckoutEnabled) {
                 alert(`Order submitted with ${this.cart.length} items. Thank you!`);
@@ -91,6 +101,7 @@ let app = new Vue({
         }
     },
     mounted() {
+        // Fetch lessons when the app is mounted
         this.fetchProducts();
     }
 });
