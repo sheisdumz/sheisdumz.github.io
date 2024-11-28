@@ -15,11 +15,24 @@ label {
     margin-right: 8px;
 }
 
-select {
+
+select, input[type="text"] {
     padding: 5px;
     margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
+/* Search Input */
+#search {
+    width: 200px; /* Adjust width as needed */
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
 /* Lessons Grid */
 .lesson-container {
     display: grid;
