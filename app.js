@@ -14,15 +14,17 @@ let app = new Vue({
         loading: true       // Loading indicator for fetching lessons
     },
     computed: {
-        // Dynamically filter and sort lessons based on search and sort criteria
         filteredLessons() {
+            const query = this.searchQuery.toLowerCase();
+
             return this.lessons
                 .filter(lesson => {
-                    const query = this.searchQuery.toLowerCase();
-                    return lesson.subject.toLowerCase().includes(query) ||
-                           lesson.location.toLowerCase().includes(query) ||
-                           lesson.price.toString().includes(query) ||
-                           lesson.spaces.toString().includes(query);
+                    const matchesSubject = lesson.subject.toLowerCase().includes(query);
+                    const matchesLocation = lesson.location.toLowerCase().includes(query);
+                    const matchesPrice = lesson.price.toString().includes(query);
+                    const matchesSpaces = lesson.spaces.toString().includes(query);
+
+                    return matchesSubject || matchesLocation || matchesPrice || matchesSpaces;
                 })
                 .sort((a, b) => {
                     let modifier = this.sortOrder === 'asc' ? 1 : -1;
