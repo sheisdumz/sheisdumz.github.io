@@ -42,6 +42,7 @@
         <!-- Toggle Cart Button -->
         <button v-on:click="toggleCartPage">
             {{ showCart ? 'Back to Lessons' : 'Shopping Cart (' + cart.length + ')' }}
+            :disabled="cart.length === 0">
         </button>
 
         <!-- Cart Section -->
