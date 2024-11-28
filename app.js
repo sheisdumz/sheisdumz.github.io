@@ -6,6 +6,7 @@ let app = new Vue({
         showCart: false,
         sortAttribute: 'subject',
         sortOrder: 'asc',
+        searchQuery: '',
         name: '',
         phone: '',
         nameError: '',
@@ -13,8 +14,14 @@ let app = new Vue({
         loading: true 
     },
     computed: {
-        sortedLessons() {
-            return this.lessons.slice().sort((a, b) => {
+        filteredLessons() {
+            return this.lessons.filter(lesson => {
+                const query = this.searchQuery.toLowerCase();
+                return lesson.subject.toLowerCase().includes(query) ||
+                       lesson.location.toLowerCase().includes(query) ||
+                       lesson.price.toString().includes(query) ||
+                       lesson.spaces.toString().includes(query);
+            }).sort((a, b) => {
                 let modifier = this.sortOrder === 'asc' ? 1 : -1;
                 if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
                 if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
