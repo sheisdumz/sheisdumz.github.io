@@ -14,12 +14,8 @@
         <!-- Search and Sort Controls -->
         <div v-if="!showCart">
             <label for="search">Search:</label>
-            <input
-                type="text"
-                id="search"
-                v-model="searchQuery"
-                placeholder="Search for lessons..."
-            >
+            <input type="text" v-model="searchQuery" placeholder="Search lessons..." @input="fetchProducts" />
+
             <label for="sortAttribute">Sort by:</label>
             <select v-model="sortAttribute" id="sortAttribute">
                 <option value="subject">Subject</option>
@@ -81,7 +77,7 @@
                     >
                     <span class="error" v-if="phoneError">{{ phoneError }}</span>
 
-                    <button v-on:click="checkout" :disabled="!isCheckoutEnabled">Checkout</button>
+                    <button v-on:click="checkoutForm" :disabled="!isCheckoutEnabled">Checkout</button>
                 </div>
             </div>
         </div>
