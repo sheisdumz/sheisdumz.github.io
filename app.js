@@ -89,14 +89,14 @@ let app = new Vue({
     // Validate name input
     validateName() {
       const nameRegex = /^[a-zA-Z\s]+$/;
-      this.nameError = nameRegex.test(this.name)
+      this.nameError = nameRegex.test(this.checkout.name)
         ? ""
         : "Name must contain only letters.";
     },
     // Validate phone input
     validatePhone() {
       const phoneRegex = /^[0-9]+$/;
-      this.phoneError = phoneRegex.test(this.phone)
+      this.phoneError = phoneRegex.test(this.checkout.phone)
         ? ""
         : "Phone must contain only numbers.";
     },
