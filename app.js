@@ -19,6 +19,14 @@ let app = new Vue({
         loading: true       // Loading indicator for fetching lessons
     },
     computed: {
+        // Enable checkout button only if name and phone are valid
+        isCheckoutEnabled() {
+            const nameValid = /^[a-zA-Z\s]+$/.test(this.name);
+            const phoneValid = /^[0-9]+$/.test(this.phone);
+            return nameValid && phoneValid;
+        }
+    },
+    methods: {
         filteredLessons() {
             // const query = this.searchQuery.toLowerCase();
 
@@ -40,14 +48,6 @@ let app = new Vue({
             this.fetchProducts(); // Ensure this is called whenever `searchQuery` changes
             return this.lessons;
         },
-        // Enable checkout button only if name and phone are valid
-        isCheckoutEnabled() {
-            const nameValid = /^[a-zA-Z\s]+$/.test(this.name);
-            const phoneValid = /^[0-9]+$/.test(this.phone);
-            return nameValid && phoneValid;
-        }
-    },
-    methods: {
         // Fetch lessons from the API
         fetchProducts: async function () {
             try {
