@@ -112,23 +112,27 @@ let app = new Vue({
         if (this.isCheckoutEnabled) {
           // First alert indicating that the order has been submitted
           alert(`Order submitted with ${this.cart.length} items. Thank you!`);
+
           
           const orderData = {
             name: this.checkout.name,
             phone: this.checkout.phone,
             courses: this.cart.reduce((acc, lesson) => {
-                const existingLesson = acc.find(item => item.id === lesson.id);
-                if (existingLesson) {
-                    existingLesson.count += 1;
-                } else {
-                    acc.push({
-                        id: lesson.id,
-                        count: 1
-                    });
-                }
-                return acc;
-            }, [])
-        };
+              // Check if the lesson is already in the accumulator
+              const existingLesson = acc.find(item => item.id === lesson.id);
+              if (existingLesson) {
+                // If found, increment the count
+                existingLesson.count += 1;
+              } else {
+                // If not found, add a new object with id and count
+                acc.push({
+                  id: lesson.id,
+                  count: 1,
+                });
+              }
+              return acc; // Return the updated accumulator
+            }, []), // Initialize with an empty array
+          };
           console.log(orderData);
       
           try {
