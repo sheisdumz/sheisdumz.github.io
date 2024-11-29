@@ -37,7 +37,8 @@ let app = new Vue({
             //         if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
             //         return 0;
             //     });
-            this.fetchProducts();
+            this.fetchProducts(); // Ensure this is called whenever `searchQuery` changes
+            return this.lessons;
         },
         // Enable checkout button only if name and phone are valid
         isCheckoutEnabled() {
@@ -50,22 +51,23 @@ let app = new Vue({
         // Fetch lessons from the API
         fetchProducts: async function () {
             try {
-                // Build the query URL with search and sorting parameters
-                const response = await fetch(
-                    `https://express-js-qwj4.onrender.com/collections/courses/search?search=${this.searchQuery}&sortKey=${this.sortKey}&sortOrder=${this.sortOrder}`
-                );
-
-                // Parse and update the products array
-                if (response.ok) {
-                    this.lessons = await response.json();
-                    console.log('Fetched lessons:', this.lessons);
-                } else {
-                    console.error('Failed to fetch products:', await response.text());
-                }
+              // Build the query URL with search and sorting parameters
+              const response = await fetch(
+                `https://express-js-qwj4.onrender.com/collections/courses/search?search=${this.searchQuery}&sortKey=${this.sortKey}&sortOrder=${this.sortOrder}`
+              );
+          
+              // Parse and update the lessons array
+              if (response.ok) {
+                this.lessons = await response.json();
+                console.log('Fetched lessons:', this.lessons);
+              } else {
+                console.error('Failed to fetch products:', await response.text());
+              }
             } catch (error) {
-                console.error('Error fetching products:', error);
+              console.error('Error fetching products:', error);
             }
-        },
+          }
+          ,
         // Add a lesson to the cart
         addToCart(lesson) {
             if (lesson.spaces > 0) {
@@ -104,7 +106,6 @@ let app = new Vue({
             if (this.isCheckoutEnabled) {
                 alert(`Order submitted with ${this.cart.length} items. Thank you!`);
                 const orderData = {
-                    orderId: orderId,
                     name: this.checkout.name,
                     phone: this.checkout.phone,
                     courses: this.cart.map(lesson => ({
