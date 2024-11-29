@@ -113,6 +113,7 @@ let app = new Vue({
               title: lesson.title,
             })),
           };
+          console.log(orderData);
       
           try {
             // Make POST request to submit the order

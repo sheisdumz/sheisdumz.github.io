@@ -63,7 +63,7 @@
                     <input
                         type="text"
                         id="name"
-                        v-model="name"
+                        v-model="checkout.name"
                         @input="validateName"
                     >
                     <span class="error" v-if="nameError">{{ nameError }}</span>
@@ -72,7 +72,7 @@
                     <input
                         type="text"
                         id="phone"
-                        v-model="phone"
+                        v-model="checkout.phone"
                         @input="validatePhone"
                     >
                     <span class="error" v-if="phoneError">{{ phoneError }}</span>
