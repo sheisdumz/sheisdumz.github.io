@@ -46,7 +46,6 @@ let app = new Vue({
             //         return 0;
             //     });
             this.fetchProducts(); // Ensure this is called whenever `searchQuery` changes
-            return this.lessons;
         },
         // Fetch lessons from the API
         fetchProducts: async function () {
