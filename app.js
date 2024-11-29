@@ -86,20 +86,27 @@ let app = new Vue({
     toggleCartPage() {
       this.showCart = !this.showCart;
     },
-    // Validate name input
     validateName() {
-      const nameRegex = /^[a-zA-Z\s]+$/;
-      this.nameError = nameRegex.test(this.checkout.name)
-        ? ""
-        : "Name must contain only letters.";
-    },
-    // Validate phone input
-    validatePhone() {
-      const phoneRegex = /^[0-9]+$/;
-      this.phoneError = phoneRegex.test(this.checkout.phone)
-        ? ""
-        : "Phone must contain only numbers.";
-    },
+        const nameRegex = /^[a-zA-Z\s]+$/;
+        if (!this.checkout.name) {
+          this.nameError = "Name is required.";
+        } else if (!nameRegex.test(this.checkout.name)) {
+          this.nameError = "Name must contain only letters.";
+        } else {
+          this.nameError = ""; // Clear the error if valid
+        }
+      },
+      
+      validatePhone() {
+        const phoneRegex = /^[0-9]+$/;
+        if (!this.checkout.phone) {
+          this.phoneError = "Phone number is required.";
+        } else if (!phoneRegex.test(this.checkout.phone)) {
+          this.phoneError = "Phone must contain only numbers.";
+        } else {
+          this.phoneError = ""; // Clear the error if valid
+        }
+      },
     // Handle checkout
     checkoutForm: async function () {
         if (this.isCheckoutEnabled) {
