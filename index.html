@@ -46,16 +46,17 @@
                 <p>Oops! There is nothing in your cart.</p>
             </div>
             <div v-else>
-                <h2>Shopping Cart</h2>
-                <div class="lesson-container">
-                    <div v-for="lesson in cart" :key="lesson.id" class="cart-item">
-                        <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
-                        <h2>{{ lesson.subject }}</h2>
-                        <p>Location: {{ lesson.location }}</p>
-                        <p>Price: Rs{{ lesson.price }}</p>
-                        <button v-on:click="removeFromCart(lesson)">Remove</button>
-                    </div>
+              <h2>Shopping Cart</h2>
+              <div class="lesson-container">
+                <div v-for="lesson in cart" :key="lesson.id" class="cart-item">
+                  <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image"> <!-- Ensure the image is displayed -->
+                  <h2>{{ lesson.subject }}</h2>
+                  <p>Location: {{ lesson.location }}</p>
+                  <p>Price: Rs{{ lesson.price }}</p>
+                  <p>Quantity: {{ lesson.count }}</p> <!-- Show quantity -->
+                  <button v-on:click="removeFromCart(lesson)">Remove</button>
                 </div>
+              </div>
 
                 <!-- Checkout Form -->
                 <div>

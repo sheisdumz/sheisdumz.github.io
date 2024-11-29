@@ -71,30 +71,33 @@ let app = new Vue({
     addToCart(lesson) {
         const existingLesson = this.cart.find(item => item.id === lesson.id);
         if (existingLesson) {
-          // Increment count if lesson already in cart
+          // Increment the count if lesson is already in the cart
           existingLesson.count += 1;
         } else {
-          // Add new lesson to cart with count of 1
+          // Add a new object with all lesson details and count = 1
           this.cart.push({
             id: lesson.id,
-            title: lesson.title,
-            count: 1, // Initialize count
+            subject: lesson.subject,
+            location: lesson.location,
+            price: lesson.price,
+            image: lesson.image,
+            count: 1,
           });
         }
-        lesson.spaces--; // Reduce available spaces
-      },
+        lesson.spaces--; // Decrement available spaces
+    },
     // Remove a lesson from the cart
     removeFromCart(lesson) {
         const existingLesson = this.cart.find(item => item.id === lesson.id);
         if (existingLesson) {
-          existingLesson.count -= 1;
+          existingLesson.count -= 1; // Decrease the count
           if (existingLesson.count === 0) {
-            // Remove lesson from cart if count is 0
+            // Remove from cart if count is 0
             this.cart = this.cart.filter(item => item.id !== lesson.id);
           }
           lesson.spaces++; // Increment available spaces
         }
-      },
+    },
     // Toggle between cart and lessons page
     toggleCartPage() {
       this.showCart = !this.showCart;
@@ -126,7 +129,7 @@ let app = new Vue({
           // First alert indicating that the order has been submitted
           alert(`Order submitted with ${this.cart.length} items. Thank you!`);
 
-
+          
           const orderData = {
             name: this.checkout.name,
             phone: this.checkout.phone,
