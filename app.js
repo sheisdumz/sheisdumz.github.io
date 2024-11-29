@@ -21,8 +21,8 @@ let app = new Vue({
   computed: {
     // Enable checkout button only if name and phone are valid
     isCheckoutEnabled() {
-      const nameValid = /^[a-zA-Z\s]+$/.test(this.name);
-      const phoneValid = /^[0-9]+$/.test(this.phone);
+      const nameValid = /^[a-zA-Z\s]+$/.test(this.checkout.name);
+      const phoneValid = /^[0-9]+$/.test(this.checkout.phone);
       return nameValid && phoneValid;
     },
   },
