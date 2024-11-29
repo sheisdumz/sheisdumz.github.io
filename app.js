@@ -125,7 +125,7 @@ let app = new Vue({
           try {
             // Make POST request to submit the order
             const response = await fetch(
-              'https://express-js-qwj4.onrender.com/collections/orders',
+              'https://express-js-qwj4.onrender.com/collections/Orders',
               {
                 method: "POST",
                 headers: {
