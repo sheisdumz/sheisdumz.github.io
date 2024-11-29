@@ -102,94 +102,88 @@ let app = new Vue({
     },
     // Handle checkout
     checkoutForm: async function () {
-      if (this.isCheckoutEnabled) {
-        alert(`Order submitted with ${this.cart.length} items. Thank you!`);
-        const orderData = {
-          name: this.checkout.name,
-          phone: this.checkout.phone,
-          courses: this.cart.map((lesson) => ({
-            title: lesson.title,
-          })),
-        };
-
-        try {
-          const response = await fetch(
-            "https://express-js-qwj4.onrender.com/collections/orders",
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json",
-              },
-
-              body: JSON.stringify(orderData),
-            }
-          );
-
-          const result = await response.json();
-
-          if (response.ok) {
-            alert("Order submitted successfully!");
-            try {
-              // Update inventory in the backend
-
-              const inventoryUpdateResponse = await fetch(
-                "https://express-js-qwj4.onrender.com/collections/products/updateSpace",
-                {
-                  method: "PUT",
-
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-
-                  body: JSON.stringify({
-                    lessons: this.cart.map((lesson) => ({
-                      title: lesson.title,
-                      quantity: 1,
-                    })),
-                  }),
-                }
-              );
-
-              if (inventoryUpdateResponse.ok) {
-                console.log("Inventory updated successfully!");
-              } else {
-                console.error(
-                  "Failed to update inventory:",
-                  await inventoryUpdateResponse.text()
+        if (this.isCheckoutEnabled) {
+          // First alert indicating that the order has been submitted
+          alert(`Order submitted with ${this.cart.length} items. Thank you!`);
+      
+          const orderData = {
+            name: this.checkout.name,
+            phone: this.checkout.phone,
+            courses: this.cart.map((lesson) => ({
+              title: lesson.title,
+            })),
+          };
+      
+          try {
+            // Make POST request to submit the order
+            const response = await fetch(
+              "https://express-js-qwj4.onrender.com/collections/orders",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(orderData),
+              }
+            );
+      
+            // Handle the response from the order submission
+            const result = await response.json();
+      
+            if (response.ok) {
+              // If the order submission was successful, handle inventory update
+              alert("Order submitted successfully!");
+      
+              try {
+                // Update inventory in the backend
+                const inventoryUpdateResponse = await fetch(
+                  "https://express-js-qwj4.onrender.com/collections/products/updateSpace",
+                  {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      lessons: this.cart.map((lesson) => ({
+                        title: lesson.title,
+                        quantity: 1, // Adjust quantity as needed
+                      })),
+                    }),
+                  }
                 );
+      
+                // Handle the response for inventory update
+                if (inventoryUpdateResponse.ok) {
+                  console.log("Inventory updated successfully!");
+                } else {
+                  console.error(
+                    "Failed to update inventory:",
+                    await inventoryUpdateResponse.text()
+                  );
+                }
+              } catch (error) {
+                alert("Failed to update inventory.");
+                console.error("Error updating inventory:", error);
               }
-
-              const result = await response.json();
-
-              if (response.ok) {
-                alert("Order submitted successfully!");
-                // Reset checkout form
-                this.checkout = {
-                  name: "",
-                  phone: "",
-                };
-                // Clear the cart and return to the main page
-
-                this.cart = [];
-                this.showCart = false;
-              } else {
-                alert("Error submitting order: " + result.error);
-              }
-            } catch (error) {
-              alert("Failed to submit order.");
+      
+              // Reset checkout form and cart if everything is successful
+              this.checkout = {
+                name: "",
+                phone: "",
+              };
+              this.cart = [];
+              this.showCart = false;
+            } else {
+              // Handle error if order submission failed
+              alert("Error submitting order: " + result.error);
             }
-            // Clear the cart and return to the main page
-            this.cart = [];
-            this.showCart = false;
-          } else {
-            alert("Error submitting order: " + result.error);
+          } catch (error) {
+            // Handle any errors during the order submission process
+            alert("Failed to submit order.");
+            console.error("Error submitting order:", error);
           }
-        } catch (error) {
-          alert("Failed to submit order.");
         }
-      }
-    },
+      },      
   },
   mounted() {
     // Fetch lessons when the app is mounted
