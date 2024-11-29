@@ -20,23 +20,24 @@ let app = new Vue({
     },
     computed: {
         filteredLessons() {
-            const query = this.searchQuery.toLowerCase();
+            // const query = this.searchQuery.toLowerCase();
 
-            return this.lessons
-                .filter(lesson => {
-                    const matchesSubject = lesson.subject.toLowerCase().includes(query);
-                    const matchesLocation = lesson.location.toLowerCase().includes(query);
-                    const matchesPrice = lesson.price.toString().includes(query);
-                    const matchesSpaces = lesson.spaces.toString().includes(query);
+            // return this.lessons
+            //     .filter(lesson => {
+            //         const matchesSubject = lesson.subject.toLowerCase().includes(query);
+            //         const matchesLocation = lesson.location.toLowerCase().includes(query);
+            //         const matchesPrice = lesson.price.toString().includes(query);
+            //         const matchesSpaces = lesson.spaces.toString().includes(query);
 
-                    return matchesSubject || matchesLocation || matchesPrice || matchesSpaces;
-                })
-                .sort((a, b) => {
-                    let modifier = this.sortOrder === 'asc' ? 1 : -1;
-                    if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
-                    if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
-                    return 0;
-                });
+            //         return matchesSubject || matchesLocation || matchesPrice || matchesSpaces;
+            //     })
+            //     .sort((a, b) => {
+            //         let modifier = this.sortOrder === 'asc' ? 1 : -1;
+            //         if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
+            //         if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
+            //         return 0;
+            //     });
+            this.fetchProducts();
         },
         // Enable checkout button only if name and phone are valid
         isCheckoutEnabled() {
@@ -56,8 +57,8 @@ let app = new Vue({
 
                 // Parse and update the products array
                 if (response.ok) {
-                    this.products = await response.json();
-                    console.log('Fetched products:', this.products);
+                    this.lessons = await response.json();
+                    console.log('Fetched lessons:', this.lessons);
                 } else {
                     console.error('Failed to fetch products:', await response.text());
                 }
@@ -99,7 +100,7 @@ let app = new Vue({
                 : 'Phone must contain only numbers.';
         },
         // Handle checkout
-        async checkoutForm() {
+        checkoutForm: async function () {
             if (this.isCheckoutEnabled) {
                 alert(`Order submitted with ${this.cart.length} items. Thank you!`);
                 const orderData = {
@@ -115,7 +116,7 @@ let app = new Vue({
 
                                     try {
 
-                        const response = await fetch('https://courses-website-coursework1.onrender.com/collections/orders', {
+                        const response = await fetch('https://express-js-qwj4.onrender.com/collections/orders', {
 
                             method: 'POST',
 
