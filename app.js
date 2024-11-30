@@ -21,11 +21,20 @@ let app = new Vue({
   computed: {
     // Enable checkout button only if name and phone are valid
     isCheckoutEnabled() {
-      const nameValid = /^[a-zA-Z\s]+$/.test(this.checkout.name);
-      const phoneValid = /^[0-9]+$/.test(this.checkout.phone);
-      return nameValid && phoneValid;
+        const nameValid = /^[a-zA-Z\s]+$/.test(this.checkout.name);
+        const phoneValid = /^[0-9]+$/.test(this.checkout.phone);
+        return nameValid && phoneValid;
     },
-  },
+    // Filter and sort lessons based on selected attribute and order
+    filteredLessons() {
+        return this.lessons.slice().sort((a, b) => {
+            let modifier = this.sortOrder === 'asc' ? 1 : -1;
+            if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
+            if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
+            return 0;
+        });
+    }
+},
   methods: {
     filteredLessons() {
       // const query = this.searchQuery.toLowerCase();
@@ -149,7 +158,7 @@ let app = new Vue({
               return acc; // Return the updated accumulator
             }, []), // Initialize with an empty array
           };
-          console.log("Updated cart:", this.cart);
+          console.log(orderData);
       
           try {
             // Make POST request to submit the order

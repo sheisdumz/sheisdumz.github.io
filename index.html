@@ -86,7 +86,7 @@
         <!-- Lessons Section -->
         <div v-else>
             <div class="lesson-container">
-                <div v-for="lesson in lessons" :key="lesson.id" class="lesson-box">
+                <div v-for="filteredLessons in lessons" :key="lesson.id" class="lesson-box">
                     <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
                     <h2>{{ lesson.subject }}</h2>
                     <p>Location: {{ lesson.location }}</p>
