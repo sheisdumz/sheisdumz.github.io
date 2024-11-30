@@ -17,14 +17,14 @@
             <input type="text" v-model="searchQuery" placeholder="Search lessons..." @input="fetchProducts" />
 
             <label for="sortAttribute">Sort by:</label>
-            <select v-model="sortAttribute" id="sortAttribute" @change="filteredLessons">
+            <select v-model="sortAttribute" id="sortAttribute" @change="fetchProducts">
                 <option value="subject">Subject</option>
                 <option value="location">Location</option>
                 <option value="price">Price</option>
                 <option value="spaces">Spaces</option>
             </select>
             <label for="sortOrder">Order:</label>
-            <select v-model="sortOrder" id="sortOrder" @change="filteredLessons">
+            <select v-model="sortOrder" id="sortOrder" @change="fetchProducts">
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
@@ -86,7 +86,7 @@
         <!-- Lessons Section -->
         <div v-else>
             <div class="lesson-container">
-                <div v-for="filteredLessons in lessons" :key="lesson.id" class="lesson-box">
+                <div v-for="computedFilteredLessons in lessons" :key="lesson.id" class="lesson-box">
                     <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image">
                     <h2>{{ lesson.subject }}</h2>
                     <p>Location: {{ lesson.location }}</p>
