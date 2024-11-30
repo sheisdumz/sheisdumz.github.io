@@ -49,6 +49,9 @@ let app = new Vue({
         } catch (error) {
           console.error("Error fetching products:", error);
         }
+        finally {
+            this.loading = false;
+        }
       },
   
       // Sort the lessons based on selected attribute and order
