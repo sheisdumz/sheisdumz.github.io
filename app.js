@@ -149,7 +149,7 @@ let app = new Vue({
               return acc; // Return the updated accumulator
             }, []), // Initialize with an empty array
           };
-          console.log(orderData);
+          console.log("Updated cart:", this.cart);
       
           try {
             // Make POST request to submit the order
