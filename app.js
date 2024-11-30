@@ -21,21 +21,12 @@ let app = new Vue({
   computed: {
     // Enable checkout button only if name and phone are valid
     isCheckoutEnabled() {
-        const nameValid = /^[a-zA-Z\s]+$/.test(this.checkout.name);
-        const phoneValid = /^[0-9]+$/.test(this.checkout.phone);
-        return nameValid && phoneValid;
+      const nameValid = /^[a-zA-Z\s]+$/.test(this.checkout.name);
+      const phoneValid = /^[0-9]+$/.test(this.checkout.phone);
+      return nameValid && phoneValid;
+      
     },
-    // Filter and sort lessons based on selected attribute and order
-        computedFilteredLessons() {
-            return this.lessons.slice().sort((a, b) => {
-                let modifier = this.sortOrder === 'asc' ? 1 : -1;
-                if (a[this.sortAttribute] < b[this.sortAttribute]) return -1 * modifier;
-                if (a[this.sortAttribute] > b[this.sortAttribute]) return 1 * modifier;
-                return 0;
-            });
-        }
-    
-},
+  },
   methods: {
     filteredLessons() {
       // const query = this.searchQuery.toLowerCase();
@@ -60,28 +51,22 @@ let app = new Vue({
     },
     // Fetch lessons from the API
     fetchProducts: async function () {
-        try {
-            const keyMap = {
-                subject: 'subject',
-                location: 'location',
-                price: 'price',
-                spaces: 'spaces',
-            };
-            const sortKey = keyMap[this.sortAttribute] || 'subject';
-    
-            const response = await fetch(
-                `https://express-js-qwj4.onrender.com/collections/courses/search?search=${this.searchQuery}&sortKey=${sortKey}&sortOrder=${this.sortOrder}`
-            );
-    
-            if (response.ok) {
-                this.lessons = await response.json();
-                console.log("Fetched lessons:", this.lessons);
-            } else {
-                console.error("Failed to fetch products:", await response.text());
-            }
-        } catch (error) {
-            console.error("Error fetching products:", error);
+      try {
+        // Build the query URL with search and sorting parameters
+        const response = await fetch(
+          `https://express-js-qwj4.onrender.com/collections/courses/search?search=${this.searchQuery}&sortKey=${this.sortKey}&sortOrder=${this.sortOrder}`
+        );
+
+        // Parse and update the lessons array
+        if (response.ok) {
+          this.lessons = await response.json();
+          console.log("Fetched lessons:", this.lessons);
+        } else {
+          console.error("Failed to fetch products:", await response.text());
         }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     },
     // Add a lesson to the cart
     addToCart(lesson) {
