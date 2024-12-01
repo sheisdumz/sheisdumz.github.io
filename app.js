@@ -181,7 +181,7 @@ let app = new Vue({
               try {
                 // Update inventory in the backend
                 const inventoryUpdateResponse = await fetch(
-                  "https://express-js-qwj4.onrender.com/collections/products/updateSpace",
+                  "https://express-js-qwj4.onrender.com/collections/products",
                   {
                     method: "PUT",
                     headers: {
